@@ -61,7 +61,7 @@ package vortex.editor.detect
 				_debugUtil.LogError(_alert);
 				
 				callback.addMsg(_alert);
-				callback.callOnFail();
+				callback.callOnSuccess();
 				return;
 			}
 			

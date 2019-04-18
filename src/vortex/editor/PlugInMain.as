@@ -15,7 +15,7 @@ package vortex.editor
     public class PlugInMain
     {
         private var _editor:IFairyGUIEditor;
-		private var _detectManager:DetectManager;
+		private var _detectManager:DetectManager; 
 
         public function PlugInMain(editor:IFairyGUIEditor)
         {

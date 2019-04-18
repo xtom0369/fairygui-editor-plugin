@@ -93,7 +93,11 @@ package vortex.editor.detect
 					var obj:Object = array as Object
 					for(var key:String in obj){
 						path += "/" + key;
-						_pathMap[path + "/"] = 1;
+//						alert += "\n" + path;
+						
+						if(path != "component") // 硬编码
+							_pathMap[path + "/"] = 1;
+						
 						parseJsonNode(obj, key, path);
 					}
 				}

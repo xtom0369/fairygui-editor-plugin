@@ -45,6 +45,9 @@ package vortex.editor.detect
 			_pkgName = publishData.targetUIPackage.name;
 			_pkgPath = publishData.targetUIPackage.basePath;
 			
+			// 加载xml
+			var xml
+			
 			var jsonData:Object = loadJson();
 			if(jsonData == null)
 				return false;
@@ -58,7 +61,7 @@ package vortex.editor.detect
 			_forbidenCharArray = new Array();
 			_forbidenCharArray = jsonData["component_forbidden_char"] as Array;			
 						
-			var pkgXml:XML = publishData.outputDesc["package.xml"];
+			var pkgXml:XML = LoadPackageXml(_pkgPath + "/package.xml");
 			detectComponentName(pkgXml);
 			
 			if(alert != ""){
@@ -66,6 +69,18 @@ package vortex.editor.detect
 			}
 			
 			return false;
+		}
+		
+		/**
+		 * 加载package.xml
+		 */
+		public function LoadPackageXml(pkgPath:String):XML{
+			var file:File = File.documentsDirectory.resolvePath(pkgPath); 
+			var fileStream:FileStream = new FileStream(); 
+			fileStream.open(file, FileMode.READ); 
+			var xml:XML = XML(fileStream.readUTFBytes(fileStream.bytesAvailable)); 
+			fileStream.close(); 
+			return xml;
 		}
 		
 		private function loadJson():Object{
@@ -91,7 +106,13 @@ package vortex.editor.detect
 				var value:* = data[key];
 				
 				if(value is String){ // 字串
-					path += "/" + key + "/";
+					if(key != ""){
+						path += "/" + key + "/";
+					}
+					else{
+						path += "/";
+					}
+					
 					_pathMap[path] = value;
 //					alert += "\n" + path + "," + value;
 				}

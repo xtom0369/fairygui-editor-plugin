@@ -118,7 +118,7 @@ package vortex.editor.detect
 				}
 				
 				var name:String = file.nativePath.replace(_pkgPath, "").split("\\").join("/"); // 只对比包内路径
-				if(!_pkgResMap.hasOwnProperty(name) && name != "/package.xml" && name != "/.DS_Store"){ // package中没有
+				if(!_pkgResMap.hasOwnProperty(name) && name != "/package.xml" && file.name != ".DS_Store" && file.name != "Thumbs.db"){ // package中没有
 					_uselessAlert += "\n" + name;
 				}
 			}
